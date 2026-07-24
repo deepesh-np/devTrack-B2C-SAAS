@@ -1,0 +1,20 @@
+{
+  "name": "devtrack-b2c-saas",
+  "version": "1.0.0",
+  "description": "DevTrack is a production-grade developer career operating system that unifies coding practice, interview preparation, project management, resume building, and job application tracking into a single intelligent platform.",
+  "homepage": "https://github.com/deepesh-np/devTrack-B2C-SAAS#readme",
+  "bugs": {
+    "url": "https://github.com/deepesh-np/devTrack-B2C-SAAS/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepesh-np/devTrack-B2C-SAAS.git"
+  },
+  "license": "MIT",
+  "author": "deepesh",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
