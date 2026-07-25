@@ -38,7 +38,7 @@ app.get('/health', (_req: Request, res: Response) => {
 app.use('/api/auth', authRoutes);
 
 //Profile routes
-app.use('api/profile', profileRoutes);
+app.use('/api/profile', profileRoutes);
 
 // Global Error Handler
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
