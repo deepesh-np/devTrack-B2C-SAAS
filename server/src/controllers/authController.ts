@@ -1,18 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import { z } from "zod";
+import { registerSchema } from "../Validators/auth.Validators.js";
 import passport from "../config/passport.js";
 import prisma from "../lib/prisma.js";
 import { signToken } from "../lib/jwt.js";
 import { config } from "../config/env.js";
-
-// Zod registration schema
-const registerSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  username: z.string().min(3, "Username must be at least 3 characters").regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
 
 // Cookie options for HTTP-only JWT storage
 const COOKIE_OPTIONS = {

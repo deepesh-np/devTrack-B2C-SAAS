@@ -1,5 +1,5 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -8,16 +8,57 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  name         String?
-  username     String?  @unique
-  email        String   @unique
-  password     String?  // Nullable for OAuth accounts
-  avatar       String?
-  provider     String   @default("LOCAL") // LOCAL, GOOGLE, GITHUB
-  googleId     String?  @unique
-  githubId     String?  @unique
+  id       String  @id @default(cuid())
+  name     String?
+  username String? @unique
+  email    String  @unique
+  password String? // Nullable for OAuth accounts
+  avatar   String?
+  provider String  @default("LOCAL") // LOCAL, GOOGLE, GITHUB
+  googleId String? @unique
+  githubId String? @unique
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  profile   Profile?
+}
+
+enum TargetCompany {
+  FAANG
+  MAANG
+  MICROSOFT
+  ADOBE
+  ATLASSIAN
+  UBER
+  STARTUP
+  OTHER
+}
+
+model Profile {
+  id String @id @default(cuid())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  bio      String?
+  headline String?
+
+  githubUsername     String?
+  leetcodeUsername   String?
+  codeforcesUsername String?
+  codechefUsername   String?
+  atcoderUsername    String?
+
+  college        String?
+  degree         String?
+  graduationYear Int?
+
+  currentCompany String?
+
+  targetCompany TargetCompany?
+
+  dailyGoal Int @default(3)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
