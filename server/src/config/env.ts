@@ -19,4 +19,5 @@ export const config = {
     clientSecret: process.env.GITHUB_CLIENT_SECRET || "placeholder_github_client_secret",
     callbackUrl: process.env.GITHUB_CALLBACK_URL || "http://localhost:5000/api/auth/github/callback",
   },
+  githubPat: process.env.GITHUB_PAT || "",
 };

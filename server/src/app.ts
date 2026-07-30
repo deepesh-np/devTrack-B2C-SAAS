@@ -5,7 +5,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import passport from './config/passport.js';
 import authRoutes from './routes/authRoutes.js';
-import profileRoutes from './routes/profileRoutes.js'
+import profileRoutes from './routes/profileRoutes.js';
+import githubRoutes from './routes/githubRoutes.js';
 import { config } from './config/env.js';
 
 const app = express();
@@ -39,6 +40,9 @@ app.use('/api/auth', authRoutes);
 
 //Profile routes
 app.use('/api/profile', profileRoutes);
+
+// Github Routes
+app.use('/api/github', githubRoutes);
 
 // Global Error Handler
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {

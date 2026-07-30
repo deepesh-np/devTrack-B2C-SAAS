@@ -1062,3 +1062,632 @@ body {
 
 .text-center { text-align: center; }
 .p-8 { padding: 2rem; }
+
+/* ==========================================
+   GITHUB INTEGRATION STYLES
+   ========================================== */
+
+@keyframes ghFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ghPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+.gh-section {
+  margin-top: 2rem;
+  animation: ghFadeIn 0.5s ease-out;
+}
+
+.gh-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.gh-section-header h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f8fafc, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gh-section-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+/* GitHub Profile Card */
+.gh-profile-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.gh-profile-card:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.gh-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(99, 102, 241, 0.4);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.gh-profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.gh-profile-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.1rem;
+}
+
+.gh-profile-login {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.gh-profile-bio {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.gh-profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.gh-profile-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gh-profile-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.gh-profile-stats span {
+  color: var(--text-muted);
+}
+
+.gh-profile-stats strong {
+  color: var(--text-main);
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+.gh-profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.gh-btn-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.gh-btn-github:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.gh-member-since {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Stat Cards Grid */
+.gh-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .gh-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.gh-stat-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  padding: 1.25rem;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.gh-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 25px -5px rgba(99, 102, 241, 0.15);
+}
+
+.gh-stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.gh-stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.2rem;
+}
+
+.gh-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Pinned Repos Grid */
+.gh-pinned-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .gh-pinned-grid { grid-template-columns: 1fr; }
+}
+
+.gh-pinned-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.gh-pinned-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.gh-pinned-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #818cf8;
+  text-decoration: none;
+  margin-bottom: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.gh-pinned-name:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+.gh-pinned-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gh-pinned-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.gh-lang-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.3rem;
+  vertical-align: middle;
+}
+
+.gh-pinned-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Contribution Calendar */
+.gh-calendar-wrapper {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+.gh-calendar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gh-calendar-total {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.gh-calendar-total strong {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.gh-calendar-months {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0.4rem;
+  padding-left: 0;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.gh-calendar-month {
+  text-align: left;
+}
+
+.gh-calendar-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 14px;
+  gap: 3px;
+}
+
+.gh-calendar-day {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: #161b22;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.gh-calendar-day:hover {
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 1px;
+}
+
+.gh-calendar-day[data-level="1"] { background: #0e4429; }
+.gh-calendar-day[data-level="2"] { background: #006d32; }
+.gh-calendar-day[data-level="3"] { background: #26a641; }
+.gh-calendar-day[data-level="4"] { background: #39d353; }
+
+.gh-calendar-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: var(--text-main);
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.35rem;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-color);
+}
+
+.gh-calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  justify-content: flex-end;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.gh-legend-box {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+}
+
+/* Language Bar */
+.gh-languages-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.gh-languages-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.gh-lang-bar {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  gap: 2px;
+}
+
+.gh-lang-segment {
+  height: 100%;
+  border-radius: 999px;
+  min-width: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.gh-lang-segment:hover {
+  opacity: 0.75;
+}
+
+.gh-lang-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+}
+
+.gh-lang-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.gh-lang-pct {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Repos List */
+.gh-repos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .gh-repos-grid { grid-template-columns: 1fr; }
+}
+
+.gh-repo-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  padding: 1.15rem;
+  transition: all 0.25s ease;
+}
+
+.gh-repo-card:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  transform: translateY(-2px);
+}
+
+.gh-repo-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #818cf8;
+  text-decoration: none;
+  margin-bottom: 0.35rem;
+  display: inline-block;
+}
+
+.gh-repo-name:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+.gh-repo-desc {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  margin-bottom: 0.65rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gh-repo-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.gh-repo-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.gh-view-all {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.gh-view-all a {
+  color: #818cf8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.gh-view-all a:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+/* Skeleton Loading */
+.gh-skeleton {
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  animation: ghPulse 1.5s ease-in-out infinite;
+}
+
+.gh-skeleton-line {
+  height: 14px;
+  margin-bottom: 0.6rem;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.06);
+  animation: ghPulse 1.5s ease-in-out infinite;
+}
+
+.gh-skeleton-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  animation: ghPulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Unavailable / Error states */
+.gh-unavailable {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gh-unavailable p {
+  margin-bottom: 0.5rem;
+}
+
+.gh-error-card {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 1rem;
+  margin-top: 2rem;
+}
+
+.gh-error-card h4 {
+  color: #f87171;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.gh-error-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.gh-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.25rem;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 0.5rem;
+  color: #f87171;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.gh-retry-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Responsive Profile Card */
+@media (max-width: 640px) {
+  .gh-profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .gh-profile-meta, .gh-profile-stats {
+    justify-content: center;
+  }
+  .gh-profile-actions {
+    width: 100%;
+    align-items: center;
+  }
+}

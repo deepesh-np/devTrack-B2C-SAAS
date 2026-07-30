@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { apiService } from '../services/api';
 import type { Profile } from '../types';
+import { GitHubIntegration } from '../components/GitHubIntegration';
 
 export const ProfilePage: React.FC = () => {
   const { user, profile, refreshProfile, setActiveView } = useAuth();
@@ -343,6 +344,10 @@ export const ProfilePage: React.FC = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {profile?.githubUsername && (
+        <GitHubIntegration githubUsername={profile.githubUsername} />
       )}
     </div>
   );

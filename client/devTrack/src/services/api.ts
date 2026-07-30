@@ -1,4 +1,5 @@
 import type { AuthResponse, ProfileResponse, User, Profile } from '../types';
+import type { GitHubData } from '../types/github';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
@@ -181,6 +182,41 @@ export const apiService = {
       return data;
     } catch (err: any) {
       const errRes = { success: false, message: err.message || 'Failed to fetch public profile' };
+      notifyLog('GET', endpoint, 500, errRes);
+      return errRes;
+    }
+  },
+
+  // GitHub Integration
+  getMyGitHubData: async (token?: string): Promise<{ success: boolean; data?: GitHubData; message?: string }> => {
+    const endpoint = '/api/github/me';
+    try {
+      const res = await fetch(`${BACKEND_URL}${endpoint}`, {
+        method: 'GET',
+        headers: getHeaders(token),
+      });
+      const data = await res.json();
+      notifyLog('GET', endpoint, res.status, data);
+      return data;
+    } catch (err: any) {
+      const errRes = { success: false, message: err.message || 'Failed to fetch GitHub data' };
+      notifyLog('GET', endpoint, 500, errRes);
+      return errRes;
+    }
+  },
+
+  getPublicGitHubData: async (username: string): Promise<{ success: boolean; data?: GitHubData; message?: string }> => {
+    const endpoint = `/api/github/user/${username}`;
+    try {
+      const res = await fetch(`${BACKEND_URL}${endpoint}`, {
+        method: 'GET',
+        headers: getHeaders(),
+      });
+      const data = await res.json();
+      notifyLog('GET', endpoint, res.status, data);
+      return data;
+    } catch (err: any) {
+      const errRes = { success: false, message: err.message || 'Failed to fetch GitHub data' };
       notifyLog('GET', endpoint, 500, errRes);
       return errRes;
     }
