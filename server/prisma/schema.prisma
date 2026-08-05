@@ -58,7 +58,7 @@ model Profile {
 
   targetCompany TargetCompany?
 
-  dailyGoal Int @default(3)
+  dailyGoal Int @default(2)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
