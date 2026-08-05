@@ -9,8 +9,8 @@ interface AuthContextType {
   serverStatus: boolean | null;
   logs: ApiLog[];
   loadingSession: boolean;
-  activeView: 'landing' | 'profile' | 'auth' | 'console';
-  setActiveView: (view: 'landing' | 'profile' | 'auth' | 'console') => void;
+  activeView: 'landing' | 'dashboard' | 'profile' | 'auth' | 'console';
+  setActiveView: (view: 'landing' | 'dashboard' | 'profile' | 'auth' | 'console') => void;
   login: (identifier: string, password: string) => Promise<{ success: boolean; message?: string }>;
   register: (name: string, email: string, username: string, password: string) => Promise<{ success: boolean; message?: string }>;
   logout: () => Promise<void>;
@@ -28,7 +28,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [serverStatus, setServerStatus] = useState<boolean | null>(null);
   const [logs, setLogs] = useState<ApiLog[]>([]);
   const [loadingSession, setLoadingSession] = useState<boolean>(true);
-  const [activeView, setActiveView] = useState<'landing' | 'profile' | 'auth' | 'console'>('landing');
+  const [activeView, setActiveView] = useState<'landing' | 'dashboard' | 'profile' | 'auth' | 'console'>('landing');
 
   const addLog = (method: string, endpoint: string, status: number, data: any) => {
     const newLog: ApiLog = {
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setToken(urlToken);
       localStorage.setItem('access_token', urlToken);
       addLog('GET', '/api/auth/oauth/callback', 200, { message: 'OAuth redirect token captured!' });
-      setActiveView('profile');
+      setActiveView('dashboard');
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
@@ -99,7 +99,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setToken(res.token);
       localStorage.setItem('access_token', res.token);
       if (res.user) setUser(res.user);
-      setActiveView('profile');
+      setActiveView('dashboard');
       return { success: true };
     }
     return { success: false, message: res.message || 'Login failed' };
@@ -111,7 +111,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setToken(res.token);
       localStorage.setItem('access_token', res.token);
       if (res.user) setUser(res.user);
-      setActiveView('profile');
+      setActiveView('dashboard');
       return { success: true };
     }
     return { success: false, message: res.message || 'Registration failed' };

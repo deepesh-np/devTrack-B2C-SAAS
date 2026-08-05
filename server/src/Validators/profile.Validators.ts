@@ -6,6 +6,7 @@ export const profileSchema = z.object({
   codeforcesUsername: z.string().trim().optional().nullable(),
   codechefUsername: z.string().trim().optional().nullable(),
   atcoderUsername: z.string().trim().optional().nullable(),
+  resumeUrl: z.string().trim().url().max(500).optional().nullable(),
   college: z.string().trim().max(100).optional().nullable(),
   degree: z.string().trim().max(50).optional().nullable(),
   graduationYear: z.number().int().min(2000).max(2100).optional().nullable(),

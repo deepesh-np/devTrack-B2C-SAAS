@@ -7,6 +7,7 @@ import passport from './config/passport.js';
 import authRoutes from './routes/authRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import githubRoutes from './routes/githubRoutes.js';
+import codingPlatformRoutes from './routes/codingPlatformRoutes.js';
 import { config } from './config/env.js';
 
 const app = express();
@@ -43,6 +44,7 @@ app.use('/api/profile', profileRoutes);
 
 // Github Routes
 app.use('/api/github', githubRoutes);
+app.use('/api/platforms', codingPlatformRoutes);
 
 // Global Error Handler
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {

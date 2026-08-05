@@ -29,14 +29,10 @@ export const Navbar: React.FC = () => {
             Home
           </button>
           
-          {user && (
-            <button
-              className={`nav-item ${activeView === 'profile' ? 'active' : ''}`}
-              onClick={() => setActiveView('profile')}
-            >
-              Dashboard & Profile
-            </button>
-          )}
+          {user && <>
+            <button className={`nav-item ${activeView === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveView('dashboard')}>Dashboard</button>
+            <button className={`nav-item ${activeView === 'profile' ? 'active' : ''}`} onClick={() => setActiveView('profile')}>Profile</button>
+          </>}
 
           <button
             className={`nav-item ${activeView === 'console' ? 'active' : ''}`}

@@ -1,10 +1,10 @@
-import React from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { DevConsole } from './components/DevConsole';
 import { LandingPage } from './pages/LandingPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { DashboardPage } from './pages/DashboardPage';
 import { AuthPage } from './pages/AuthPage';
 import './index.css';
 
@@ -17,6 +17,7 @@ function MainLayout() {
 
       <main className="main-content">
         {activeView === 'landing' && <LandingPage />}
+        {activeView === 'dashboard' && <DashboardPage />}
         {activeView === 'profile' && <ProfilePage />}
         {activeView === 'auth' && <AuthPage />}
         {activeView === 'console' && (

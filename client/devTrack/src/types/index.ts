@@ -28,6 +28,7 @@ export interface Profile {
   codeforcesUsername?: string | null;
   codechefUsername?: string | null;
   atcoderUsername?: string | null;
+  resumeUrl?: string | null;
   college?: string | null;
   degree?: string | null;
   graduationYear?: number | null;
@@ -61,4 +62,17 @@ export interface ApiLog {
   endpoint: string;
   status: number;
   data: any;
+}
+
+export type CodingPlatform = 'leetcode' | 'codeforces' | 'codechef' | 'atcoder';
+export interface CodingPlatformData {
+  platform: CodingPlatform;
+  username: string;
+  profileUrl: string;
+  verified: boolean;
+  rating: number | null;
+  solvedProblems: number | null;
+  contestHistory: Array<{ name: string; rating: number | null; date: string }>;
+  lastUpdated: string;
+  message?: string;
 }

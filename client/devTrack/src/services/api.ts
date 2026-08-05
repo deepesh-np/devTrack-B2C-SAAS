@@ -1,4 +1,4 @@
-import type { AuthResponse, ProfileResponse, User, Profile } from '../types';
+import type { AuthResponse, ProfileResponse, User, Profile, CodingPlatformData } from '../types';
 import type { GitHubData } from '../types/github';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
@@ -222,6 +222,20 @@ export const apiService = {
     }
   },
 
+
+  getMyCodingPlatforms: async (token?: string): Promise<{ success: boolean; platforms?: CodingPlatformData[]; validationErrors?: Partial<Record<CodingPlatformData['platform'], string>>; message?: string }> => {
+    const endpoint = '/api/platforms/me';
+    try {
+      const res = await fetch(`${BACKEND_URL}${endpoint}`, { method: 'GET', headers: getHeaders(token) });
+      const data = await res.json();
+      notifyLog('GET', endpoint, res.status, data);
+      return data;
+    } catch (err: any) {
+      const errRes = { success: false, message: err.message || 'Failed to fetch coding platform data' };
+      notifyLog('GET', endpoint, 500, errRes);
+      return errRes;
+    }
+  },
   // OAuth Redirect URLs
   getGoogleAuthUrl: () => `${BACKEND_URL}/api/auth/google`,
   getGithubAuthUrl: () => `${BACKEND_URL}/api/auth/github`,

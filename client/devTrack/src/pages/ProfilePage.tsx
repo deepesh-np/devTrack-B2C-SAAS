@@ -18,6 +18,7 @@ export const ProfilePage: React.FC = () => {
     codeforcesUsername: '',
     codechefUsername: '',
     atcoderUsername: '',
+    resumeUrl: '',
     college: '',
     degree: '',
     graduationYear: 2026,
@@ -36,6 +37,7 @@ export const ProfilePage: React.FC = () => {
         codeforcesUsername: profile.codeforcesUsername || '',
         codechefUsername: profile.codechefUsername || '',
         atcoderUsername: profile.atcoderUsername || '',
+        resumeUrl: profile.resumeUrl || '',
         college: profile.college || '',
         degree: profile.degree || '',
         graduationYear: profile.graduationYear || 2026,
@@ -51,11 +53,13 @@ export const ProfilePage: React.FC = () => {
     setSaving(true);
     setMessage(null);
 
-    const payload = {
-      ...formData,
-      graduationYear: formData.graduationYear ? Number(formData.graduationYear) : undefined,
-      dailyGoal: formData.dailyGoal ? Number(formData.dailyGoal) : 3,
-    };
+    const payload = Object.fromEntries(
+      Object.entries({
+        ...formData,
+        graduationYear: formData.graduationYear ? Number(formData.graduationYear) : undefined,
+        dailyGoal: formData.dailyGoal ? Number(formData.dailyGoal) : 3,
+      }).map(([key, value]) => [key, typeof value === 'string' && value.trim() === '' ? null : value]),
+    );
 
     const res = profile
       ? await apiService.updateProfile(payload)
@@ -199,6 +203,16 @@ export const ProfilePage: React.FC = () => {
                   placeholder="e.g. chef_john"
                   value={formData.codechefUsername || ''}
                   onChange={(e) => setFormData({ ...formData, codechefUsername: e.target.value })}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Resume URL</label>
+                <input
+                  type="url"
+                  placeholder="https://example.com/resume.pdf"
+                  value={formData.resumeUrl || ''}
+                  onChange={(e) => setFormData({ ...formData, resumeUrl: e.target.value })}
                 />
               </div>
 

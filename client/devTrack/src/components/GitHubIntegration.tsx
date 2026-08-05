@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { apiService } from '../services/api';
-import type { GitHubData, ContributionDay } from '../types/github';
+import type { GitHubData } from '../types/github';
 
 interface GitHubIntegrationProps {
   githubUsername: string;
@@ -133,8 +133,6 @@ export const GitHubIntegration: React.FC<GitHubIntegrationProps> = ({ githubUser
     }
   };
 
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  
   return (
     <div className="gh-section">
       <div className="gh-section-header">

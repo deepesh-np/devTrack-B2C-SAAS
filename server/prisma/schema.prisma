@@ -48,6 +48,7 @@ model Profile {
   codeforcesUsername String?
   codechefUsername   String?
   atcoderUsername    String?
+  resumeUrl          String?
 
   college        String?
   degree         String?
