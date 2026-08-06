@@ -206,6 +206,27 @@ export async function fetchLanguageStats(username: string, repos: any[]) {
   return stats;
 }
 
+function getContributionStreak(weeks: any[]) {
+  const days = weeks.flatMap((week) => week.contributionDays).sort((a, b) => a.date.localeCompare(b.date));
+  const active = new Set(days.filter((day) => day.contributionCount > 0).map((day) => day.date));
+  let longest = 0, current = 0;
+  for (const day of days) { if (active.has(day.date)) { current += 1; longest = Math.max(longest, current); } else current = 0; }
+  let ongoing = 0; const cursor = new Date();
+  while (active.has(cursor.toISOString().slice(0, 10))) { ongoing += 1; cursor.setUTCDate(cursor.getUTCDate() - 1); }
+  return { current: ongoing, longest };
+}
+
+export function buildRepositoryAnalytics(repos: any[], languageStats: any[] | null, contributionStats: any) {
+  const now = Date.now();
+  const totals = repos.reduce((acc, repo) => ({ stars: acc.stars + repo.stargazers_count, forks: acc.forks + repo.forks_count }), { stars: 0, forks: 0 });
+  const mostActive = [...repos].sort((a, b) => new Date(b.pushed_at || b.updated_at).getTime() - new Date(a.pushed_at || a.updated_at).getTime()).slice(0, 5).map((repo) => ({ ...repo, daysSincePush: Math.max(0, Math.floor((now - new Date(repo.pushed_at || repo.updated_at).getTime()) / 86400000)) }));
+  const activeLast90Days = repos.filter((repo) => now - new Date(repo.pushed_at || repo.updated_at).getTime() <= 90 * 86400000).length;
+  const documented = repos.filter((repo) => Boolean(repo.description || repo.homepage || repo.topics?.length)).length;
+  const healthScore = repos.length === 0 ? 0 : Math.round((activeLast90Days / repos.length) * 55 + (documented / repos.length) * 30 + (repos.filter((repo) => !repo.archived).length / repos.length) * 15);
+  const weeklyContributions = contributionStats?.weeks?.map((week: any) => week.contributionDays.reduce((sum: number, day: any) => sum + day.contributionCount, 0)) ?? [];
+  return { topLanguages: languageStats?.slice(0, 5) ?? [], mostActive, totals, commitFrequency: { averageWeeklyContributions: weeklyContributions.length ? Number((weeklyContributions.reduce((sum: number, value: number) => sum + value, 0) / weeklyContributions.length).toFixed(1)) : null, weeklyContributions }, health: { score: healthScore, label: healthScore >= 75 ? 'Strong' : healthScore >= 45 ? 'Maintaining' : 'Needs attention', activeLast90Days, documented, totalRepos: repos.length }, streak: contributionStats?.weeks ? getContributionStreak(contributionStats.weeks) : null };
+}
+
 export async function fetchFullGitHubData(username: string) {
   let profile = null;
   let repos: any = [];

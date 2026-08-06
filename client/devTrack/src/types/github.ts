@@ -20,6 +20,9 @@ export interface GitHubRepo {
   forks_count: number;
   language: string | null;
   updated_at: string;
+  pushed_at: string;
+  open_issues_count: number;
+  archived: boolean;
   html_url: string;
   homepage: string | null;
   topics: string[];
@@ -60,10 +63,20 @@ export interface PinnedRepo {
   } | null;
 }
 
+export interface RepositoryAnalytics {
+  topLanguages: LanguageStat[];
+  mostActive: Array<GitHubRepo & { daysSincePush: number }> ;
+  totals: { stars: number; forks: number };
+  commitFrequency: { averageWeeklyContributions: number | null; weeklyContributions: number[] };
+  health: { score: number; label: string; activeLast90Days: number; documented: number; totalRepos: number };
+  streak: { current: number; longest: number } | null;
+}
+
 export interface GitHubData {
   profile: GitHubProfile | null;
   repos: GitHubRepo[] | null;
   contributionStats: ContributionStats | null;
   languageStats: LanguageStat[] | null;
   pinnedRepos: PinnedRepo[] | null;
+  analytics: RepositoryAnalytics;
 }
